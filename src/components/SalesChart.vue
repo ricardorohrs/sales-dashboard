@@ -70,6 +70,10 @@ export default {
         filteredSalesData = filteredSalesData.filter(sale => sale.category === filters.value.category);
       }
 
+      if (filters.value.startDate && filters.value.endDate) {
+          filteredSalesData = filteredSalesData.filter(sale => sale.filterDate >= filters.value.startDate && sale.filterDate <= filters.value.endDate);
+      }
+
       const updatedDatasets = [
         {
           label: 'Categoria A',

@@ -38,9 +38,14 @@ export default {
     const filters = computed(() => store.state.filters);
 
     const filteredSalesData = computed(() => {
-      return salesData.value.filter(
-          sale => !filters.value.category || sale.category === filters.value.category
-      );
+      return salesData.value.filter(sale => {
+        const categoryMatch = !filters.value.category || sale.category === filters.value.category;
+
+        const dateMatch = (!filters.value.startDate || sale.filterDate >= filters.value.startDate) &&
+            (!filters.value.endDate || sale.filterDate <= filters.value.endDate);
+
+        return categoryMatch && dateMatch;
+      });
     });
 
     return {

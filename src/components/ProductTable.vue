@@ -46,6 +46,10 @@ export default {
         filteredProducts = filteredProducts.filter(product => product.category === filters.value.category);
       }
 
+      if (filters.value.startDate && filters.value.endDate) {
+        filteredProducts = filteredProducts.filter(product => product.filterDate >= filters.value.startDate && product.filterDate <= filters.value.endDate);
+      }
+
       return filteredProducts.sort((a, b) => {
         if (a[sortField.value] < b[sortField.value]) {
           return -1 * parseInt(sortOrder.value);
