@@ -19,10 +19,15 @@
           th Vendas
           th Categoria
       tbody
-        tr(v-for="product in filteredAndSortedProducts" :key="product.id")
+        tr(v-for="product in paginatedProducts" :key="product.id")
           td {{ product.name }}
           td {{ product.sales }}
           td {{ product.category }}
+
+    div.pagination-controls
+      button(@click="prevPage" :disabled="currentPage === 1") Anterior
+      span {{ currentPage }} de {{ totalPages }}
+      button(@click="nextPage" :disabled="currentPage === totalPages") Próximo
 </template>
 
 <script>
@@ -38,6 +43,8 @@ export default {
 
     const sortField = ref('name');
     const sortOrder = ref('1');
+    const currentPage = ref(1);
+    const itemsPerPage = 9;
 
     const filteredAndSortedProducts = computed(() => {
       let filteredProducts = products.value;
@@ -61,15 +68,38 @@ export default {
       });
     });
 
+    const totalPages = computed(() => Math.ceil(filteredAndSortedProducts.value.length / itemsPerPage));
+
+    const paginatedProducts = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      return filteredAndSortedProducts.value.slice(start, end);
+    });
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        currentPage.value += 1;
+      }
+    };
+
+    const prevPage = () => {
+      if (currentPage.value > 1) {
+        currentPage.value -= 1;
+      }
+    };
+
     return {
       sortField,
       sortOrder,
-      filteredAndSortedProducts,
+      paginatedProducts,
+      currentPage,
+      totalPages,
+      nextPage,
+      prevPage,
     };
   }
 };
 </script>
-
 
 <style scoped>
 .table {
@@ -122,4 +152,14 @@ th {
   background-color: #f2f2f2;
 }
 
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+button {
+  margin: 0 30px 0 30px;
+}
 </style>

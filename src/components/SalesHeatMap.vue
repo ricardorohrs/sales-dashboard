@@ -6,6 +6,7 @@
         layer-type="base"
         name="OpenStreetMap"
       )
+
       l-circle-marker(
         v-for="(circle, index) in filteredSalesData"
         :key="index"
