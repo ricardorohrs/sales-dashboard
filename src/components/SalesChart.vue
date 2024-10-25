@@ -4,9 +4,9 @@
 </template>
 
 <script>
-import {computed, onMounted, ref, watch} from 'vue';
-import {Chart, registerables} from 'chart.js';
-import {useStore} from "vuex";
+import { computed, onMounted, ref, watch } from 'vue';
+import { Chart, registerables } from 'chart.js';
+import { useStore } from 'vuex';
 
 export default {
   setup() {
@@ -76,8 +76,8 @@ export default {
           data: filteredSalesData
               .filter(item => item.category === 'A')
               .map(data => data.sales),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(192, 100, 50, 0.2)',
+          borderColor: 'rgba(192, 100, 50, 1)',
           borderWidth: 1,
         },
         {
@@ -85,8 +85,8 @@ export default {
           data: filteredSalesData
               .filter(item => item.category === 'B')
               .map(data => data.sales),
-          backgroundColor: 'rgba(192, 100, 50, 0.2)',
-          borderColor: 'rgba(192, 100, 50, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
         }
       ];
@@ -112,18 +112,16 @@ export default {
     });
 
     watch(salesData, (newSalesData) => {
-      if (Array.isArray(newSalesData) && newSalesData.length > 0) {
+      if (newSalesData.length) {
         if (chartInstance) {
           updateChart();
         } else {
           createChart();
         }
-      } else {
-        console.log('Nenhum dado de vendas disponível para atualizar o gráfico');
       }
     });
 
-    return {chartCanvas};
-  }
+    return { chartCanvas };
+  },
 };
 </script>

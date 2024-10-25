@@ -75,7 +75,7 @@ export default {
 }
 
 .table-filter {
-  padding: 30px 0 20px 0;
+  padding: 0 0 7px 0;
 }
 
 .table-filter label {
@@ -101,12 +101,12 @@ th {
 }
 
 .table-container {
-  max-height: 400px;
+  max-height: 420px;
   overflow-y: auto;
 }
 
 .table {
-  width: 92%;
+  width: 93%;
 }
 
 th, td {
@@ -115,7 +115,7 @@ th, td {
 }
 
 th {
-  background-color: #f2f2f2; /* Cor de fundo do cabeçalho da tabela */
+  background-color: #f2f2f2;
 }
 
 </style>

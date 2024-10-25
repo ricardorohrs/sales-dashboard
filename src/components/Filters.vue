@@ -8,7 +8,7 @@
 
     label Categoria
     select(v-model="filters.category" @change="updateFilters")
-      option(value="" disabled selected) Selecione
+      option(value="" disabled selected) Selecione a categoria
       option(value="A") A
       option(value="B") B
       option(value="") Todas

@@ -6,33 +6,32 @@
     Filters(@update-filters="updateFilters" :filters="filters")
 
   <v-container>
-  <v-row no-gutters>
-  <v-col cols="12" md="8">
-  <v-container class="chart">
-  SalesChart
+    <v-row>
+      <v-col cols="12" md="8">
+        <v-container class="chart">
+          SalesChart
+        </v-container>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-container class="table">
+          ProductTable
+        </v-container>
+      </v-col>
+    </v-row>
   </v-container>
-  </v-col>
-  <v-col cols="12" md="4">
-  <v-container class="table">
-  ProductTable
-  </v-container>
+
+  <v-row>
+    <v-col cols="12">
+      <v-container>
+        SalesHeatMap
+      </v-container>
     </v-col>
   </v-row>
-  </v-container>
-
-  //div.wrapper
-  //  div.chart
-  //    SalesChart
-  //  div.table
-  //    ProductTable
-
-  div.map
-    SalesHeatMap
 </template>
 
 <script>
-import {computed, onMounted} from 'vue';
-import {useStore} from 'vuex';
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import SalesChart from '../components/SalesChart.vue';
 import ProductTable from '../components/ProductTable.vue';
 import Filters from '../components/Filters.vue';
@@ -40,7 +39,13 @@ import SalesHeatMap from '../components/SalesHeatMap.vue';
 import Navbar from "@/components/Navbar.vue";
 
 export default {
-  components: {Navbar, SalesChart, ProductTable, Filters, SalesHeatMap},
+  components: {
+    Navbar,
+    SalesChart,
+    ProductTable,
+    Filters,
+    SalesHeatMap
+  },
   setup() {
     const store = useStore();
 
@@ -57,7 +62,7 @@ export default {
       store.commit('setFilters', newFilters);
     };
 
-    return {salesData, filters, topProducts, updateFilters};
+    return { salesData, filters, topProducts, updateFilters };
   },
 };
 </script>
@@ -69,11 +74,7 @@ export default {
   flex-direction: column;
 }
 
-.chart {
-  margin-top: 15px;
-}
-
-.table {
-  margin-top: 10px;
+.v-container {
+ max-width: 1500px !important;
 }
 </style>
